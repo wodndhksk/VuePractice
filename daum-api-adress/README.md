@@ -1,24 +1,7 @@
 # daum-api-adress
 
-## Project setup
-```
-npm install
-```
+## 실행 화면
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![화면 캡처 2022-07-01 155121](https://user-images.githubusercontent.com/73927761/176840367-111b0a94-6a4b-4ea8-a60d-587d5741656c.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 우편번호 찾기 버튼 클릭시 팝업 이벤트 발생

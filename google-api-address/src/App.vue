@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h2>Your Address</h2>
+    <input type="text" id="address"/>
+    <vue-google-autocomplete
+      ref="address"
+      id="map"
+      classname="form-control"
+      placeholder="Please type your address"
+      v-on:placechanged="getAddressData"
+      country="sg"
+    >
+    </vue-google-autocomplete>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import VueGoogleAutocomplete from "vue-google-autocomplete";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    components: { VueGoogleAutocomplete },
+
+    data: function () {
+      return {
+        address: "",
+      };
+    },
+
+    mounted() {
+      // To demonstrate functionality of exposed component functions
+      // Here we make focus on the user input
+      this.$refs.address.focus();
+    },
+
+    methods: {
+      /**
+       * When the location found
+       * @param {Object} addressData Data of the found location
+       * @param {Object} placeResultData PlaceResult object
+       * @param {String} id Input container ID
+       */
+      getAddressData: function (addressData, placeResultData, id) {
+        this.address = addressData;
+      },
+    },
+  };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

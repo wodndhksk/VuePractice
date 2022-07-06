@@ -1,47 +1,34 @@
 <template>
-  <div>
-    <h2>Your Address</h2>
-    <input type="text" id="address"/>
-    <vue-google-autocomplete
-      ref="address"
-      id="map"
-      classname="form-control"
-      placeholder="Please type your address"
-      v-on:placechanged="getAddressData"
-      country="sg"
-    >
-    </vue-google-autocomplete>
-  </div>
+  <input id="autocomplete" type="text">
 </template>
 
 <script>
-  import VueGoogleAutocomplete from "vue-google-autocomplete";
-
   export default {
-    components: { VueGoogleAutocomplete },
-
+    components: { 
+        
+    },
     data: function () {
       return {
-        address: "",
+        
       };
     },
-
     mounted() {
-      // To demonstrate functionality of exposed component functions
-      // Here we make focus on the user input
-      this.$refs.address.focus();
-    },
+      const google = window.google
+      //Google AutoComplete Place
+      var autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("autocomplete"),
+      //{type:['geocode']}
+      );
 
-    methods: {
-      /**
-       * When the location found
-       * @param {Object} addressData Data of the found location
-       * @param {Object} placeResultData PlaceResult object
-       * @param {String} id Input container ID
-       */
-      getAddressData: function (addressData, placeResultData, id) {
-        this.address = addressData;
-      },
+      autocomplete.addListener('place_changed', () => {
+        let placeTemp = autocomplete.getPlace();
+        // 주소가 들어있는 값
+        let address = placeTemp.address_components;
+        console.log(address);
+      })
     },
+    methods: {
+    
+    }
   };
-</script>
+  </script>

@@ -13,23 +13,24 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+        
+
         new Vue({
             el: '#app',
             data: {
                 num: 10
             },
             watch: { //data의 변화에 따라 특정 로직을 실행할 수 있는 로직 (num 값이 변경되면 실행됨)
-                num(){
-                    this.logText();
+                num(newValue, oldValue){
+                    this.fetchUserByNumber(newValue);
                 }
             },
             methods: {
-                addNum() {
-                    this.num = this.num + 1;
-                },
-                logText() {
-                    console.log('changed');
+                fetchUserByNumber(num){
+                    console.log(num);
+                    axios.get(num);
                 }
             }
         })
